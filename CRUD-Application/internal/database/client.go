@@ -1,8 +1,11 @@
 package database
 
 import (
+	"context"
 	"fmt"
 	"time"
+
+	"go-microservices/internal/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -11,6 +14,7 @@ import (
 
 type DatabaseClient interface {
 	Ready() bool
+	GetAllCustomers(ctx context.Context, emailAddress string) ([]models.Customer, error)
 }
 
 type Client struct {

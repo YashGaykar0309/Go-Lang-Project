@@ -1,11 +1,11 @@
 package server
 
 import (
-	"go-microservices/internal/database"
 	"log"
 	"net/http"
 
-	"CRUD-Application/internal/models"
+	"go-microservices/internal/database"
+	"go-microservices/internal/models"
 
 	"github.com/labstack/echo/v4"
 )
