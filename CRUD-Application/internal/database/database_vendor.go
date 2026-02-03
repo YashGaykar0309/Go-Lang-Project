@@ -44,3 +44,30 @@ func (c Client) GetVendorByID(ctx context.Context, vendorID string) (*models.Ven
 	}
 	return vendor, nil
 }
+
+func (c Client) UpdateVendor(ctx context.Context, vendor *models.Vendor) (*models.Vendor, error) {
+	result := c.DB.WithContext(ctx).
+		Save(vendor)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrDuplicatedKey) {
+			return nil, &dberrors.ConflictError{}
+		}
+		return nil, result.Error
+	}
+	if result.RowsAffected == 0 {
+		return nil, &dberrors.NotFoundError{Entity: "vendor", ID: vendor.VendorID}
+	}
+	return vendor, nil
+}
+
+func (c Client) DeleteVendor(ctx context.Context, vendorID string) error {
+	result := c.DB.WithContext(ctx).
+		Delete(&models.Vendor{VendorID: vendorID})
+	if result.Error != nil {
+		return result.Error
+	}
+	if result.RowsAffected == 0 {
+		return &dberrors.NotFoundError{Entity: "vendor", ID: vendorID}
+	}
+	return nil
+}

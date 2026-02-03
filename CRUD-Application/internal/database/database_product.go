@@ -44,3 +44,30 @@ func (c Client) GetProductByID(ctx context.Context, productID string) (*models.P
 	}
 	return product, nil
 }
+
+func (c Client) UpdateProduct(ctx context.Context, product *models.Product) (*models.Product, error) {
+	result := c.DB.WithContext(ctx).
+		Save(product)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrDuplicatedKey) {
+			return nil, &dberrors.ConflictError{}
+		}
+		return nil, result.Error
+	}
+	if result.RowsAffected == 0 {
+		return nil, &dberrors.NotFoundError{Entity: "product", ID: product.ProductID}
+	}
+	return product, nil
+}
+
+func (c Client) DeleteProduct(ctx context.Context, productID string) error {
+	result := c.DB.WithContext(ctx).
+		Delete(&models.Product{ProductID: productID})
+	if result.Error != nil {
+		return result.Error
+	}
+	if result.RowsAffected == 0 {
+		return &dberrors.NotFoundError{Entity: "product", ID: productID}
+	}
+	return nil
+}

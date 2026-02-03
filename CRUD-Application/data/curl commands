@@ -8,6 +8,16 @@ curl "http://localhost:8080/customers?emailAddress=jay.patil%40example.com"
 🔍 Get Customer (GET – by ID)
 curl http://localhost:8080/customers/80c08168-12bb-4184-8261-775f2fd3367f
 
+🧑‍💼 Update Customer (PUT – by ID)
+curl -X PUT http://localhost:8080/customers/80c08168-12bb-4184-8261-775f2fd3367f -H "Content-Type: application/json" -d "{\"customerId\":\"80c08168-12bb-4184-8261-775f2fd3367f\",\"firstName\":\"Jay\",\"lastName\":\"Patil\",\"emailAddress\":\"jay.patil@example.com\",\"phoneNumber\":\"9876543210\",\"address\":\"Mumbai, Russia\"}"
+
+Test Customer to check Delete functionality
+    curl -X POST http://localhost:8080/customers -H "Content-Type: application/json" -d "{\"firstName\":\"Test\",\"lastName\":\"User\",\"emailAddress\":\"test.user@example.com\",\"phoneNumber\":\"9876543211\",\"address\":\"Delhi, India\"}"
+
+🗑 Delete Customer (DELETE – by ID)
+curl -X DELETE http://localhost:8080/customers/e41d9517-a2d2-49a7-8573-27620521e0ac
+
+
 
 
 📦 Product
@@ -19,6 +29,16 @@ curl "http://localhost:8080/products?name=Yash%20Gaykar%20CAKE"
 
 🔍 Get Product (GET – by ID)
 curl http://localhost:8080/products/2d1bbd8e-ece3-418a-9c55-69e97fcf465a
+
+🧑‍💼 Update Product
+curl -X PUT http://localhost:8080/products/2d1bbd8e-ece3-418a-9c55-69e97fcf465a -H "Content-Type: application/json" -d "{\"productId\":\"2d1bbd8e-ece3-418a-9c55-69e97fcf465a\",\"name\":\"Yash Gaykar SPECIAL CAKE\",\"price\":599.00,\"vendorId\":\"9762cd50-5a14-49c3-9b34-eeb4ea39dc91\"}"
+
+
+Test Customer to check Delete functionality
+curl -X POST http://localhost:8080/products -H "Content-Type: application/json" -d "{\"name\":\"Test Product\",\"price\":199.00,\"vendorId\":\"9762cd50-5a14-49c3-9b34-eeb4ea39dc91\"}"
+
+🗑 Delete Product (DELETE – by ID)
+curl -X DELETE http://localhost:8080/products/ce84e01f-eccf-4d7a-98c3-99ea68935fd9
 
 
 
@@ -32,6 +52,14 @@ curl "http://localhost:8080/services?name=Pet%20Grooming"
 🔍 Get Service (GET – by ID)
 curl http://localhost:8080/services/49ebf9b4-0ef1-437d-8ed7-15ba3e672d62
 
+🧑‍💼 Update Service
+curl -X PUT http://localhost:8080/services/49ebf9b4-0ef1-437d-8ed7-15ba3e672d62 -H "Content-Type: application/json" -d "{\"serviceId\":\"49ebf9b4-0ef1-437d-8ed7-15ba3e672d62\",\"name\":\"Premium Pet Grooming\",\"price\":999.00}"
+
+Test Customer to check Delete functionality
+curl -X POST http://localhost:8080/services -H "Content-Type: application/json" -d "{\"name\":\"Test Service\",\"price\":299.00}"
+
+🗑 Delete Service (DELETE – by ID)
+curl -X DELETE http://localhost:8080/services/821eb268-af39-427a-880e-aceca95e2806
 
 
 🏪 Vendor
@@ -43,3 +71,12 @@ curl "http://localhost:8080/vendors?name=PetCare%20Supplies"
 
 🔍 Get Vendor (GET – by ID)
 curl http://localhost:8080/vendors/0564c8e5-633e-48d9-a742-ebc777d598d9
+
+🧑‍💼 Update Vendor
+curl -X PUT http://localhost:8080/vendors/0564c8e5-633e-48d9-a742-ebc777d598d9 -H "Content-Type: application/json" -d "{\"vendorId\":\"0564c8e5-633e-48d9-a742-ebc777d598d9\",\"name\":\"PetCare Super Supplies\",\"emailAddress\":\"vendor@petcare.com\",\"phoneNumber\":\"9998887776\",\"address\":\"Pune, India\",\"contact\":\"Rahul Sharma\"}"
+
+Test Customer to check Delete functionality
+curl -X POST http://localhost:8080/vendors -H "Content-Type: application/json" -d "{\"name\":\"Test Vendor\",\"emailAddress\":\"test.vendor@example.com\",\"phoneNumber\":\"9998887777\",\"address\":\"Mumbai, India\",\"contact\":\"Test Contact\"}"   
+
+🗑 Delete Vendor (DELETE – by ID)
+curl -X DELETE http://localhost:8080/vendors/b52fc7d1-ae83-42e0-9990-9eb5d874e3e1

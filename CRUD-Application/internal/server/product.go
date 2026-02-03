@@ -48,3 +48,40 @@ func (s *EchoServer) GetProductByID(ctx echo.Context) error {
 	}
 	return ctx.JSON(http.StatusOK, product)
 }
+
+func (s *EchoServer) UpdateProduct(ctx echo.Context) error {
+	product := new(models.Product)
+	productID := ctx.Param("productID")
+	if err := ctx.Bind(product); err != nil {
+		return ctx.JSON(http.StatusUnsupportedMediaType, err)
+	}
+	if product.ProductID != productID {
+		return ctx.JSON(http.StatusBadRequest, "product ID in path and body do not match")
+	}
+	updatedProduct, err := s.DB.UpdateProduct(ctx.Request().Context(), product)
+	if err != nil {
+		switch err.(type) {
+		case *dberrors.NotFoundError:
+			return ctx.JSON(http.StatusNotFound, err)
+		case *dberrors.ConflictError:
+			return ctx.JSON(http.StatusConflict, err)
+		default:
+			return ctx.JSON(http.StatusInternalServerError, err)
+		}
+	}
+	return ctx.JSON(http.StatusOK, updatedProduct)
+}
+
+func (s *EchoServer) DeleteProduct(ctx echo.Context) error {
+	productID := ctx.Param("productID")
+	err := s.DB.DeleteProduct(ctx.Request().Context(), productID)
+	if err != nil {
+		switch err.(type) {
+		case *dberrors.NotFoundError:
+			return ctx.JSON(http.StatusNotFound, err)
+		default:
+			return ctx.JSON(http.StatusInternalServerError, err)
+		}
+	}
+	return ctx.NoContent(http.StatusNoContent)
+}

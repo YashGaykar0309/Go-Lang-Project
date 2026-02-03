@@ -17,18 +17,26 @@ type DatabaseClient interface {
 	GetAllCustomers(ctx context.Context, emailAddress string) ([]models.Customer, error)
 	AddCustomer(ctx context.Context, customer *models.Customer) (*models.Customer, error)
 	GetCustomerByID(ctx context.Context, customerID string) (*models.Customer, error)
+	UpdateCustomer(ctx context.Context, customer *models.Customer) (*models.Customer, error)
+	DeleteCustomer(ctx context.Context, customerID string) error
 
 	GetAllProducts(ctx context.Context, name string) ([]models.Product, error)
 	AddProduct(ctx context.Context, product *models.Product) (*models.Product, error)
 	GetProductByID(ctx context.Context, productID string) (*models.Product, error)
+	UpdateProduct(ctx context.Context, product *models.Product) (*models.Product, error)
+	DeleteProduct(ctx context.Context, productID string) error
 
 	GetAllServices(ctx context.Context, name string) ([]models.Service, error)
 	AddService(ctx context.Context, service *models.Service) (*models.Service, error)
 	GetServiceByID(ctx context.Context, serviceID string) (*models.Service, error)
+	UpdateService(ctx context.Context, service *models.Service) (*models.Service, error)
+	DeleteService(ctx context.Context, serviceID string) error
 
 	GetAllVendors(ctx context.Context, name string) ([]models.Vendor, error)
 	AddVendor(ctx context.Context, vendor *models.Vendor) (*models.Vendor, error)
 	GetVendorByID(ctx context.Context, vendorID string) (*models.Vendor, error)
+	UpdateVendor(ctx context.Context, vendor *models.Vendor) (*models.Vendor, error)
+	DeleteVendor(ctx context.Context, vendorID string) error
 }
 
 type Client struct {
