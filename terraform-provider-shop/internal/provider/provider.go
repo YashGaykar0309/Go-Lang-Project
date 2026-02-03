@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 
+	"github.com/YashGaykar0309/terraform-provider-shop/internal/resources"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
@@ -43,16 +44,10 @@ func (p *ShopProvider) Schema(
 	}
 }
 
-// func (p *ShopProvider) Configure(
-// 	ctx context.Context,
-// 	req provider.ConfigureRequest,
-// 	resp *provider.ConfigureResponse,
-// ) {
-// 	// NEXT STEP: wire client here
-// }
-
 func (p *ShopProvider) Resources(ctx context.Context) []func() resource.Resource {
-	return nil
+	return []func() resource.Resource{
+		resources.NewCustomerResource,
+	}
 }
 
 func (p *ShopProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
