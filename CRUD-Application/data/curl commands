@@ -1,0 +1,45 @@
+🧑 Customer
+➕ Create Customer (POST)
+curl -X POST http://localhost:8080/customers -H "Content-Type: application/json" -d "{\"firstName\":\"Jay\",\"lastName\":\"Patil\",\"emailAddress\":\"jay.patil@example.com\",\"phoneNumber\":\"9876543210\",\"address\":\"Mumbai, India\"}"
+
+🔍 Get Customer (GET – by email)
+curl "http://localhost:8080/customers?emailAddress=jay.patil%40example.com"
+
+🔍 Get Customer (GET – by ID)
+curl http://localhost:8080/customers/80c08168-12bb-4184-8261-775f2fd3367f
+
+
+
+📦 Product
+➕ Create Product (POST)
+curl -X POST http://localhost:8080/products -H "Content-Type: application/json" -d "{\"name\":\"Yash Gaykar CAKE\",\"price\":499.50,\"vendorId\":\"9762cd50-5a14-49c3-9b34-eeb4ea39dc91\"}"
+
+🔍 Get Product (GET – by name)
+curl "http://localhost:8080/products?name=Yash%20Gaykar%20CAKE"
+
+🔍 Get Product (GET – by ID)
+curl http://localhost:8080/products/2d1bbd8e-ece3-418a-9c55-69e97fcf465a
+
+
+
+🛠 Service
+➕ Create Service (POST)
+curl -X POST http://localhost:8080/services -H "Content-Type: application/json" -d "{\"name\":\"Pet Grooming\",\"price\":799.00}"
+
+🔍 Get Service (GET – by name)
+curl "http://localhost:8080/services?name=Pet%20Grooming"
+
+🔍 Get Service (GET – by ID)
+curl http://localhost:8080/services/49ebf9b4-0ef1-437d-8ed7-15ba3e672d62
+
+
+
+🏪 Vendor
+➕ Create Vendor (POST)
+curl -X POST http://localhost:8080/vendors -H "Content-Type: application/json" -d "{\"name\":\"PetCare Supplies\",\"emailAddress\":\"vendor@petcare.com\",\"phoneNumber\":\"9998887776\",\"address\":\"Pune, India\",\"contact\":\"Rahul Sharma\"}"
+
+🔍 Get Vendor (GET – by name)
+curl "http://localhost:8080/vendors?name=PetCare%20Supplies"
+
+🔍 Get Vendor (GET – by ID)
+curl http://localhost:8080/vendors/0564c8e5-633e-48d9-a742-ebc777d598d9

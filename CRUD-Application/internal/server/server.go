@@ -16,9 +16,20 @@ type Server interface {
 	Liveness(ctx echo.Context) error
 
 	GetAllCustomers(ctx echo.Context) error
+	AddCustomer(ctx echo.Context) error
+	GetCustomerByID(ctx echo.Context) error
+
 	GetAllProducts(ctx echo.Context) error
+	AddProduct(ctx echo.Context) error
+	GetProductByID(ctx echo.Context) error
+
 	GetAllServices(ctx echo.Context) error
+	AddService(ctx echo.Context) error
+	GetServiceByID(ctx echo.Context) error
+
 	GetAllVendors(ctx echo.Context) error
+	AddVendor(ctx echo.Context) error
+	GetVendorByID(ctx echo.Context) error
 }
 
 type EchoServer struct {
@@ -33,6 +44,10 @@ func NewEchoServer(db database.DatabaseClient) Server {
 	}
 
 	server.registerRoutes()
+	// Log registered routes to help diagnose routing issues
+	for _, r := range server.echo.Routes() {
+		log.Printf("registered route: %s %s", r.Method, r.Path)
+	}
 	return server
 }
 
@@ -50,15 +65,23 @@ func (s *EchoServer) registerRoutes() {
 
 	cg := s.echo.Group("/customers")
 	cg.GET("", s.GetAllCustomers)
+	cg.POST("", s.AddCustomer)
+	cg.GET("/:customerID", s.GetCustomerByID)
 
 	pg := s.echo.Group("/products")
 	pg.GET("", s.GetAllProducts)
+	pg.POST("", s.AddProduct)
+	pg.GET("/:productID", s.GetProductByID)
 
 	sg := s.echo.Group("/services")
 	sg.GET("", s.GetAllServices)
+	sg.POST("", s.AddService)
+	sg.GET("/:serviceID", s.GetServiceByID)
 
 	vg := s.echo.Group("/vendors")
 	vg.GET("", s.GetAllVendors)
+	vg.POST("", s.AddVendor)
+	vg.GET("/:vendorID", s.GetVendorByID)
 }
 
 func (s *EchoServer) Readiness(ctx echo.Context) error {
