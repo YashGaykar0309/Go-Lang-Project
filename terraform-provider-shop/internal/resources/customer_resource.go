@@ -179,6 +179,8 @@ func (r *CustomerResource) Update(
 		return
 	}
 
+	plan.ID = state.ID
+
 	resp.State.Set(ctx, plan)
 }
 

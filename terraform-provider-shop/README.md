@@ -4,6 +4,21 @@ This guide walks through **building, installing, and executing** the `shop_custo
 
 ---
 
+# IN SHORT :- OPEN CMD
+```
+cd D:\Work_dsi\MyPersonalProjects\GoLang\terraform-provider-shop
+go mod tidy
+go build -o terraform-provider-shop.exe
+
+mkdir %APPDATA%\terraform.d\plugins\registry.terraform.io\yashgaykar\shop\0.1.0\windows_amd64
+copy terraform-provider-shop.exe %APPDATA%\terraform.d\plugins\registry.terraform.io\yashgaykar\shop\0.1.0\windows_amd64\
+
+cd examples
+terraform init
+terraform apply
+```
+
+
 ## 1️⃣ Build the Provider (CMD)
 
 Open **Command Prompt** and run:
@@ -28,6 +43,8 @@ go build -o terraform-provider-shop.exe
 ```cmd
 mkdir %APPDATA%\terraform.d\plugins\registry.terraform.io\yashgaykar\shop\0.1.0\windows_amd64
 ```
+
+e.g  C:\Users\YGR2\AppData\Roaming\terraform.d\plugins\registry.terraform.io\yashgaykar\shop\0.1.0\windows_amd64 
 
 ### Copy the provider binary
 
