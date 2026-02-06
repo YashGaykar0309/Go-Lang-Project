@@ -47,6 +47,8 @@ func (p *ShopProvider) Schema(
 func (p *ShopProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		resources.NewCustomerResource,
+		resources.NewServiceResource,
+		resources.NewVendorResource,
 	}
 }
 
