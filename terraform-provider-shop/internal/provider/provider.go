@@ -49,6 +49,7 @@ func (p *ShopProvider) Resources(ctx context.Context) []func() resource.Resource
 		resources.NewCustomerResource,
 		resources.NewServiceResource,
 		resources.NewVendorResource,
+		resources.NewProductResource,
 	}
 }
 
